@@ -89,6 +89,79 @@ class ResultController extends Controller
     }
 
 
+    // -------- 3 semester upload ----------
+    public function three_upload(Request $request)
+    {
+        $request->validate([
+            'pdf' => 'required|mimes:pdf',
+        ]);
+
+        // Store file in storage/app/private/uploads/
+        $path = $request->file('pdf')->store('uploads/3rd');
+        $filePath = storage_path('app/private/uploads/3rd/' . basename($path));
+
+        if (!file_exists($filePath)) {
+            return back()->with('error', "File not found at path: $filePath");
+        }
+
+        $parser = new Parser();
+        $pdf = $parser->parseFile($filePath);
+        $text = $pdf->getText();
+
+        $count = 0;
+
+        // ✅ 1. Parse PASSED students — (3th: 2.57, 2rd: 2.37, ...)
+        preg_match_all(
+            '/(\d+)\s*\(gpa3:\s*([\d.]+),\s*gpa2:\s*([\d.]+),\s*gpa1:\s*([\d.]+)\)/i',
+            $text,
+            $passedMatches,
+            PREG_SET_ORDER
+        );
+
+        foreach ($passedMatches as $m) {
+            Result::updateOrCreate(
+                ['roll' => $m[1]],
+                [
+                    'gpa3'    => $m[2],
+                    'gpa2'    => $m[3],
+                    'gpa1'    => $m[4],
+                    'ref_sub' => null, // no failed subjects
+                ]
+            );
+            $count++;
+        }
+
+        // ✅ 2. Parse FAILED students — { 5th: ref, 4rd: ref, ..., ref_sub: ... }
+        preg_match_all(
+            '/(\d+)\s*\{\s*gpa5:\s*(ref|[\d.]+),\s*gpa4:\s*(ref|[\d.]+),\s*gpa3:\s*(ref|[\d.]+),\s*gpa2:\s*(ref|[\d.]+),\s*gpa1:\s*(ref|[\d.]+),\s*ref_sub:\s*([^}]+)\}/i',
+            $text,
+            $failedMatches,
+            PREG_SET_ORDER
+        );
+        
+
+        foreach ($failedMatches as $m) {
+            $refSubs = trim(preg_replace('/\s+/', ' ', $m[7])); // clean up whitespace/newlines
+
+            Result::updateOrCreate(
+                ['roll' => $m[1]],
+                [
+                    'gpa5'    => $m[2],
+                    'gpa4'    => $m[3],
+                    'gpa3'    => $m[4],
+                    'gpa2'    => $m[5],
+                    'gpa1'    => $m[6],
+                    'ref_sub' => $refSubs, // store failed subjects list
+                ]
+            );
+            $count++;
+        }
+
+        // Log::info("Inserted or updated $count records from PDF");
+        return back()->with('success', "$count results imported successfully!");
+    }
+
+
 
 
     // -------- search ----------

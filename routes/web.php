@@ -4,14 +4,13 @@ use App\Models\Result;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ResultController;
-use App\Http\Controllers\Result2Controller;
 
 Route::get('/admin/upload', [ResultController::class, 'index'])->name('index');
 Route::post('/upload', [ResultController::class, 'upload'])->name('upload.pdf');
 
 Route::get('/', function () {
     return view('search');
-})->name('search');
+})->name('home');
 Route::post('/', [ResultController::class, 'search'])->name('search');
 
 // only for juthi

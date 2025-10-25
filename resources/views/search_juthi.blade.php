@@ -79,10 +79,10 @@
 
         <!-- Footer link -->
         <div class="mt-8 text-center">
-            <a href="{{ route('index') }}" 
+            <a href="{{ route('home') }}" 
                class="inline-block text-purple-700 font-semibold hover:text-purple-900 transition">
                 <h2 class="text-base sm:text-lg underline decoration-purple-400 hover:decoration-purple-600">
-                    🌸 Go to PDF Submit Page
+                    🌸 Go to regular page
                 </h2>
             </a>
         </div>
@@ -92,7 +92,6 @@
     <script>
         const messages = [
             "Hey Juthi, welcome to your own special version of the result page!",
-            "You make every page brighter, every project sweeter",
             "This page is made just for you — because you deserve something beautiful 💫"
         ];
         const textElement = document.getElementById("typedText");

@@ -28,7 +28,7 @@
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
                     <div><p class="font-bold text-gray-700">1st semester</p><p class="text-lg">{{ $result->gpa1 }}</p></div>
                     <div><p class="font-bold text-gray-700">2nd semester</p><p class="text-lg">{{ $result->gpa2 }}</p></div>
-                    <div><p class="font-bold text-gray-700">3rd semester</p><p class="text-lg">{{ $result->gpa3 }}</p></div>
+                    <div><p class="font-bold text-gray-700">3rd semester</p><p class="text-lg">{{ $result->gpa3 }}</p></div> <br>
                     <div><p class="font-bold text-gray-700">4th semester</p><p class="text-lg">{{ $result->gpa4 }}</p></div>
                     <div><p class="font-bold text-gray-700">5th semester</p><p class="text-lg">{{ $result->gpa5 }}</p></div>
                 </div>

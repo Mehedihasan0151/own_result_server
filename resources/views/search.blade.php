@@ -9,7 +9,7 @@
 
     <div class="w-full max-w-2xl bg-white p-6 sm:p-8 md:p-10 rounded-2xl shadow-2xl border border-gray-100 transition-all duration-300 hover:shadow-green-300">
         <h1 class="text-2xl sm:text-3xl font-extrabold text-center text-gray-800 mb-8">
-            🎓 Search Student Result
+             Search Student Result
         </h1>
 
         <!-- Search Form -->
@@ -33,38 +33,18 @@
             </div>
         </form>
 
-        <!-- Search Result Section -->
-        @if(isset($result))
-            @if($result)
-                <div class="mt-8 bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl shadow-inner border border-green-200">
-                    <h2 class="font-bold text-lg sm:text-xl text-green-800 mb-4 text-center">
-                        Result for Roll: <span class="text-gray-900">{{ $result->roll }}</span>
-                    </h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700">
-                        <p><span class="font-semibold">GPA 1:</span> {{ $result->gpa1 }}</p>
-                        <p><span class="font-semibold">GPA 2:</span> {{ $result->gpa2 }}</p>
-                        <p><span class="font-semibold">GPA 3:</span> {{ $result->gpa3 }}</p>
-                        <p><span class="font-semibold">GPA 4:</span> {{ $result->gpa4 }}</p>
-                    </div>
-                </div>
-            @else
-                <div class="mt-8 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-lg shadow-md text-center">
-                    <h3 class="font-bold text-lg mb-1">⚠️ Error: Result Not Found</h3>
-                    <p>
-                        No result found for roll <span class="font-bold">{{ request('roll') }}</span>. Please check the number and try again.
-                    </p>
-                </div>
-            @endif
-        @endif
-
-        <div class="mt-8 text-center">
-            <a href="{{ route('index') }}" 
-               class="inline-block text-green-700 font-semibold hover:text-green-900 transition">
-                <h2 class="text-base sm:text-lg underline decoration-green-400 hover:decoration-green-600">
-                    📄 Go to PDF Submit Page
-                </h2>
-            </a>
+        <!-- Bangla Warning Text -->
+        <div class="mt-10 text-center">
+            <p class="text-red-600 font-semibold leading-relaxed">
+                ⚠️ এটি আমার বানানো প্রথম রেজাল্টের ওয়েবসাইট। এর মধ্যে যদি কোনোটা এরর দেয় বা ভুল হয় তাহলে জানাবেন। আশা করি এমন হবেনা। এবার ফিডব্যাক ভালো থাকলে পরেরবার কিছু Amazing ফিচার নিয়ে আসব আরও সুন্দরভাবে।
+            </p>
         </div>
+
+        <!-- Footer Section -->
+        <footer class="mt-8 text-center text-gray-500 text-sm border-t border-gray-200 pt-4">
+            &copy; {{ date('Y') }} Developed by <span class="font-semibold text-gray-700">Mehedi Hasan</span>, 6th Semester.
+        </footer>
+
     </div>
 
 </body>
