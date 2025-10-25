@@ -50,32 +50,11 @@
                 <div class="text-center">
                     <a href="{{ route('juthi.result') }}" 
                        class="inline-block bg-indigo-500 text-white px-6 py-3 rounded-lg font-semibold shadow hover:bg-indigo-600 ...">
-                        💫 View Your Result (763042)
+                        💫 View Your Result
                     </a>
                 </div>
             </div>
         </form>
-
-        <!-- Result Section -->
-        @if(isset($result))
-            @if($result)
-                <div class="mt-8 bg-gradient-to-br from-purple-50 to-indigo-50 p-6 rounded-xl shadow-inner border border-purple-200">
-                    <h2 class="font-bold text-lg sm:text-xl text-purple-800 mb-4 text-center">
-                        Result for Roll: <span class="text-gray-900">{{ $result->roll }}</span>
-                    </h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700">
-                        <p><span class="font-semibold">GPA 1:</span> {{ $result->gpa1 }}</p>
-                        <p><span class="font-semibold">GPA 2:</span> {{ $result->gpa2 }}</p>
-                        <p><span class="font-semibold">GPA 3:</span> {{ $result->gpa3 }}</p>
-                        <p><span class="font-semibold">GPA 4:</span> {{ $result->gpa4 }}</p>
-                    </div>
-                </div>
-            @else
-                <p class="mt-8 text-gray-600 text-center text-lg">
-                    No result found for roll <span class="font-semibold text-gray-800">{{ request('roll') }}</span>.
-                </p>
-            @endif
-        @endif
 
         <!-- Footer link -->
         <div class="mt-8 text-center">

@@ -11,7 +11,12 @@ class ResultController extends Controller
 {
     public function index()
     {
-        return view('results.index');
+        return view('upload.5th_sem');
+    }
+
+    public function index_3rd()
+    {
+        return view('upload.3rd_sem');
     }
 
     // -------- 5 semester upload ----------
@@ -131,9 +136,9 @@ class ResultController extends Controller
             $count++;
         }
 
-        // ✅ 2. Parse FAILED students — { 5th: ref, 4rd: ref, ..., ref_sub: ... }
+        // ✅ 2. Parse FAILED students — { 3th: ref, 2rd: ref, ..., ref_sub: ... }
         preg_match_all(
-            '/(\d+)\s*\{\s*gpa5:\s*(ref|[\d.]+),\s*gpa4:\s*(ref|[\d.]+),\s*gpa3:\s*(ref|[\d.]+),\s*gpa2:\s*(ref|[\d.]+),\s*gpa1:\s*(ref|[\d.]+),\s*ref_sub:\s*([^}]+)\}/i',
+            '/(\d+)\s*\{\s*gpa3:\s*(ref|[\d.]+),\s*gpa2:\s*(ref|[\d.]+),\s*gpa1:\s*(ref|[\d.]+),\s*ref_sub:\s*([^}]+)\}/i',
             $text,
             $failedMatches,
             PREG_SET_ORDER
@@ -141,16 +146,14 @@ class ResultController extends Controller
         
 
         foreach ($failedMatches as $m) {
-            $refSubs = trim(preg_replace('/\s+/', ' ', $m[7])); // clean up whitespace/newlines
+            $refSubs = trim(preg_replace('/\s+/', ' ', $m[5])); // clean up whitespace/newlines
 
             Result::updateOrCreate(
                 ['roll' => $m[1]],
                 [
-                    'gpa5'    => $m[2],
-                    'gpa4'    => $m[3],
-                    'gpa3'    => $m[4],
-                    'gpa2'    => $m[5],
-                    'gpa1'    => $m[6],
+                    'gpa3'    => $m[2],
+                    'gpa2'    => $m[3],
+                    'gpa1'    => $m[4],
                     'ref_sub' => $refSubs, // store failed subjects list
                 ]
             );

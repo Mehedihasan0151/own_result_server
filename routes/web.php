@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ResultController;
 
 Route::get('/admin/upload', [ResultController::class, 'index'])->name('index');
-Route::post('/upload', [ResultController::class, 'upload'])->name('upload.pdf');
+Route::get('/admin/upload/3rd', [ResultController::class, 'index_3rd'])->name('3rd_sem');
+Route::post('/upload', [ResultController::class, 'upload'])->name('upload');
+Route::post('/upload/3rd', [ResultController::class, 'three_upload'])->name('three_upload');
 
 Route::get('/', function () {
     return view('search');

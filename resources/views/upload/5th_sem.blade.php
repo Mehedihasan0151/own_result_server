@@ -25,7 +25,7 @@
         @endif
 
         <!-- Upload Form -->
-        <form action="{{ route('upload.pdf') }}" method="POST" enctype="multipart/form-data" class="mb-8 space-y-5">
+        <form action="{{ route('upload') }}" method="POST" enctype="multipart/form-data" class="mb-8 space-y-5">
             @csrf
             <div>
                 <label class="block font-semibold text-gray-700 mb-2 text-sm sm:text-base">
